@@ -13,7 +13,7 @@ A lineary-modular Nextflow pipelnie for processing and analysis of high-coverage
 - **Annotation**: Taxonomic annotation by GTDB-Tk, virulence/plasmid search by Abricate+BLAST
 - **Evaluation**: Genome quality and abundance assessment (CheckM2, CoverM, metaQUAST)
 
-![pipeline chart](workflow.png)
+![pipeline chart](scripts/workflow.png)
 
 ## Profiles
 > actually working and usable
