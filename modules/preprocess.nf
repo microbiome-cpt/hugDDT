@@ -132,7 +132,7 @@ process DORADO_CORRECT {
     """
     export LD_LIBRARY_PATH=~/pipe_dev/dorado-1.3.0-linux-x64/lib:\$LD_LIBRARY_PATH
 
-    ~/pipe_dev/dorado-1.2.0-linux-x64/bin/dorado correct \
+    ${projectDir}/dorado-1.2.0-linux-x64/bin/dorado correct \
     -t ${task.cpus} ${ont_reads} | pigz -p 100 > ${ont_reads.simpleName}.corrected.fasta.gz
     """
 }

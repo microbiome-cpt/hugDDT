@@ -85,7 +85,7 @@ cols_vf.remove(vf.columns[0])  # remove original filename-column
 for col in cols_vf:
     q_sub[col] = [vf.at[x, col] if x in vf.index else float('nan') for x in order]
 # --- финальный вывод ---
-q_sub.to_csv("genomes_report.csv", sep='\t', index=False)
+q_sub.to_csv("genomes_report.csv", sep=';', index=False)
 
 
 

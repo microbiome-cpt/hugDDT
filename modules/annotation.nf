@@ -85,7 +85,7 @@ process ABRICATE {
         tail -n +2 "\$f" >> hit_list.tsv
     done
 
-    python ~/pipe_dev/scripts/blastpy.py ${bins}
+    python ${projectDir}/scripts/blastpy.py ${bins}
     """
 }
 
@@ -96,11 +96,12 @@ process REPORTING {
     tuple val(sample_name), path(checkm), path(coverm), path(gtdb), path(abr_sum), path(abr_list), path(blast)
 
     output:
-    tuple val(sample_name), path('virulence_list.tsv'), path('genomes_report.csv')
+    tuple val(sample_name), path('virulence_list.tsv'), path('genomes_report.csv'), path('bins_plot.png')
 
     script:
     """
-    python ~/pipe_dev/scripts/final_reports.py ${checkm} ${coverm} ${gtdb} ${abr_sum} ${abr_list} ${blast}
+    python ${projectDir}/scripts/final_reports.py ${checkm} ${coverm} ${gtdb} ${abr_sum} ${abr_list} ${blast}
+    bash ${projectDir}/scripts/reprocess_reports.sh ${outdir} --noblast
     """
 }
 

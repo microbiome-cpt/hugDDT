@@ -167,14 +167,12 @@ process DORADO_POLISH {
     script:
     """
     # Align reads to a reference using dorado aligner, sort and index
-    ~/pipe_dev/dorado-1.2.0-linux-x64/bin/dorado aligner ${assembly} ${reads} | samtools sort --threads ${task.cpus} > aligned_reads.bam
+    ${projectDir}/dorado-1.2.0-linux-x64/bin/dorado aligner ${assembly} ${reads} | samtools sort --threads ${task.cpus} > aligned_reads.bam
     samtools index aligned_reads.bam -@ ${task.cpus}
 
     # Call consensus
-    ~/pipe_dev/dorado-1.2.0-linux-x64/bin/dorado polish aligned_reads.bam ${assembly} --bacteria --ignore-read-groups > polished_assembly.fasta
+    ${projectDir}/dorado-1.2.0-linux-x64/bin/dorado polish aligned_reads.bam ${assembly} --bacteria --ignore-read-groups > polished_assembly.fasta
     """
-//        ${params.medaka_opts}
-//    """
 }
 
 process NEXTPOLISH {
