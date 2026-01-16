@@ -292,11 +292,10 @@ sizes_for_legend = np.linspace(df['Genome_Size'].min(),
                                5)
 
 def genome_to_area(g):
-    # подставь ТУ ЖЕ формулу, что используется в твоём scatter (... s=...)
     return g * size_scale
-legend_handles = []
-legend_labels = []
-for g in sizes_for_legend:
+    legend_handles = []
+    legend_labels = []
+    for g in sizes_for_legend:
     s = genome_to_area(g)
     h = ax.scatter([], [], s=s,
                    facecolors="lightgray",
@@ -315,7 +314,6 @@ ax.legend(
     scatterpoints=1,
     labelspacing=3.6,
     fontsize=14,
-    reverse=True,
     handletextpad=3.3,
     borderpad=1.1
 )

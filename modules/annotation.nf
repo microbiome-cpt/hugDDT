@@ -21,7 +21,7 @@ process GTDBTK {
         --genome_dir ${bins} \
         --out_dir ./ \
         --cpus ${task.cpus} \
-        --pplacer_cpus 32 \
+        --pplacer_cpus ${params.pplacer_cpus} \
         --mash_db ./mash_db.msh \
         ${params.gtdbtk_opts}
     """
@@ -70,7 +70,7 @@ process ABRICATE {
 
     script:
     """
-    export BLASTDB=/mnt/raid0/Databases/DDTdb/blastdb
+    export BLASTDB=${params.databases}/blastdb
     
     # Search against multiple databases
     for i in ${mags}; do
@@ -101,7 +101,7 @@ process REPORTING {
     script:
     """
     python ${projectDir}/scripts/final_reports.py ${checkm} ${coverm} ${gtdb} ${abr_sum} ${abr_list} ${blast}
-    bash ${projectDir}/scripts/reprocess_reports.sh ${outdir} --noblast
+    bash ${projectDir}/scripts/reprocess_reports.sh ${params.outdir} --noblast
     """
 }
 

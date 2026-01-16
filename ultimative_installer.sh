@@ -13,8 +13,17 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 echo "LETS INSTALL CONDA ENVS!"
 # --- create environments ---
 for yml in envs/*.yml; do
-    mamba env create -f "$yml"
+    env_name=$(grep '^name:' "$yml" | cut -d' ' -f2)
+    if ! conda env list | grep -q "^$env_name\s"; then
+        echo "Creating environment: $env_name"
+        mamba env create -f "$yml"
+    else
+        echo "$env_name already exists, skipping..."
+    fi
 done
+
+# --- place in custom abricate VF database ---
+cp csp_vfdb $(conda info --base)/db
 
 echo "CHECK IF THE ENVS ARE IN THE LIST:"
 conda env list
@@ -47,3 +56,5 @@ echo "DON'T BOTHER IF YOU SEE SOME [samtools] Make Error.."
 echo ""
 echo "CHECK IF NEXTPOLISH VERSION APPAERS:"
 nextPolish -v
+
+echo "You're good to go!"
